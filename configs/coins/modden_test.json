@@ -1,0 +1,67 @@
+{
+    "coin": {
+      "name": "Modden_Test",
+      "shortcut": "MDDNT",
+      "label": "MOddenT",
+      "alias": "modden test"
+    },
+    "ports": {
+      "backend_rpc": 26886,
+      "backend_message_queue": 36886,
+      "blockbook_internal": 16886,
+      "blockbook_public": 16887
+    },
+    "ipc": {
+      "rpc_url_template": "http://127.0.0.1:{{.Ports.BackendRPC}}",
+      "rpc_user": "moddentest",
+      "rpc_pass": "modden1234",
+      "rpc_timeout": 25,
+      "message_queue_binding_template": "tcp://127.0.0.1:{{.Ports.BackendMessageQueue}}"
+    },
+    "backend": {
+      "package_name": "backend-moddentest",
+      "package_revision": "satoshilabs-1",
+      "system_user": "moddentest",
+      "version": "2.0.1.0",
+      "binary_url": "https://github.com/Nectum8/Modden_test/releases/download/v1/modden_test.zip",
+      "verification_type": "sha256",
+      "verification_source": "88fc792816d1b3622181760080736303b3bfff178a6244c76ba4d12decf6cf71",
+      "extract_command": "unzip -j -d backend",
+      "exclude_files": [
+        ""
+      ],
+      "exec_command_template": "{{.Env.BackendInstallPath}}/{{.Coin.Alias}}/moddend -datadir={{.Env.BackendDataPath}}/{{.Coin.Alias}}/backend -conf={{.Env.BackendInstallPath}}/{{.Coin.Alias}}/{{.Coin.Alias}}.conf -pid=/run/{{.Coin.Alias}}/{{.Coin.Alias}}.pid",
+      "logrotate_files_template": "{{.Env.BackendDataPath}}/{{.Coin.Alias}}/backend/*.log",
+      "postinst_script_template": "",
+      "service_type": "forking",
+      "service_additional_params_template": "",
+      "protect_memory": false,
+      "mainnet": true,
+      "server_config_file": "bitcoin_like.conf",
+      "client_config_file": "bitcoin_like_client.conf",
+      "additional_params": {
+        "whitelist": "127.0.0.1"
+      }
+    },
+    "blockbook": {
+      "package_name": "blockbook-modden_test",
+      "system_user": "blockbook-modden_test",
+      "internal_binding_template": ":{{.Ports.BlockbookInternal}}",
+      "public_binding_template": ":{{.Ports.BlockbookPublic}}",
+      "explorer_url": "",
+      "additional_params": "",
+      "block_chain": {
+        "parse": true,
+        "mempool_workers": 8,
+        "mempool_sub_workers": 2,
+        "block_addresses_to_keep": 300,
+        "xpub_magic": 36513075,
+        "slip44": 846,
+        "additional_params": {}
+      }
+    },
+    "meta": {
+      "package_maintainer": "Modden Test",
+      "package_maintainer_email": "admin@modden.io"
+    }
+  }
