@@ -80,7 +80,7 @@ import (
 	"github.com/Nectum8/blockbook/bchain/coins/zec"
 	"github.com/Nectum8/blockbook/bchain/coins/zenzo"
 	"github.com/Nectum8/blockbook/common"
-	"github.com/Nectum8/blockbook/bchain/coins/Modden_test"
+	"github.com/Nectum8/blockbook/bchain/coins/moddentest"
 )
 
 type blockChainFactory func(config json.RawMessage, pushHandler func(bchain.NotificationType)) (bchain.BlockChain, error)
@@ -179,7 +179,7 @@ func init() {
 	BlockChainFactories["Essentia"] = essentia.NewEssentiaRPC
 	BlockChainFactories["Dogecash"] = dogecash.NewDogecashRPC
 	BlockChainFactories["Stakecubecoin"] = stakecubecoin.NewStakecubecoinRPC
-	BlockChainFactories["Modden_test"] = modden_test.NewModden_TestRPC
+	BlockChainFactories["moddentest"] = moddentest.NewmoddentestRPC
 }
 
 // GetCoinNameFromConfig gets coin name and coin shortcut from config file
