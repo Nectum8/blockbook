@@ -1,4 +1,4 @@
-package modden_test
+package moddentest
 
 import (
 	"github.com/Nectum8/blockbook/bchain"
@@ -24,13 +24,13 @@ func init() {
 	MainNetParams.ScriptHashAddrID = []byte{51}
 }
 
-type modden_testparser struct {
+type moddentestparser struct {
 	*btc.BitcoinParser
 	baseparser *bchain.BaseParser
 }
 
-func Newmodden_testparser(params *chaincfg.Params, c *btc.Configuration) *modden_testparser {
-	return &modden_testparser{BitcoinParser: btc.NewBitcoinParser(params, c), baseparser: &bchain.BaseParser{}}
+func Newmoddentestparser(params *chaincfg.Params, c *btc.Configuration) *moddentestparser {
+	return &moddentestparser{BitcoinParser: btc.NewBitcoinParser(params, c), baseparser: &bchain.BaseParser{}}
 }
 
 func GetChainParams(chain string) *chaincfg.Params {
