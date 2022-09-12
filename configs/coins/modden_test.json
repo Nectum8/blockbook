@@ -1,9 +1,9 @@
 {
     "coin": {
-      "name": "Modden_Test",
+      "name": "moddentest",
       "shortcut": "MDDNT",
-      "label": "MOddenT",
-      "alias": "modden test"
+      "label": "moddentest",
+      "alias": "moddentest"
     },
     "ports": {
       "backend_rpc": 26886,
@@ -44,8 +44,8 @@
       }
     },
     "blockbook": {
-      "package_name": "blockbook-modden_test",
-      "system_user": "blockbook-modden_test",
+      "package_name": "blockbook-moddentest",
+      "system_user": "blockbook-moddentest",
       "internal_binding_template": ":{{.Ports.BlockbookInternal}}",
       "public_binding_template": ":{{.Ports.BlockbookPublic}}",
       "explorer_url": "",
@@ -61,7 +61,7 @@
       }
     },
     "meta": {
-      "package_maintainer": "Modden Test",
+      "package_maintainer": "moddentest",
       "package_maintainer_email": "admin@modden.io"
     }
   }
