@@ -1,4 +1,4 @@
-package modden_test
+package moddentest
 
 import (
 	"encoding/json"
@@ -12,12 +12,12 @@ type modden_testRPC struct {
 	*btc.BitcoinRPC
 }
 
-func Newmodden_testRPC(config json.RawMessage, pushHandler func(bchain.NotificationType)) (bchain.BlockChain, error) {
+func NewmoddentestRPC(config json.RawMessage, pushHandler func(bchain.NotificationType)) (bchain.BlockChain, error) {
 	b, err := btc.NewBitcoinRPC(config, pushHandler)
 	if err != nil {
 		return nil, err
 	}
-	s := &Mmodden_testRPC{
+	s := &moddentestRPC{
 		b.(*btc.BitcoinRPC),
 	}
 	s.RPCMarshaler = btc.JSONMarshalerV1{}
@@ -25,21 +25,21 @@ func Newmodden_testRPC(config json.RawMessage, pushHandler func(bchain.Notificat
 	return s, nil
 }
 
-func (b *modden_testRPC) Initialize() error {
+func (b *moddentestRPC) Initialize() error {
 	ci, err := b.GetChainInfo()
 	if err != nil {
 		return err
 	}
 	chainName := ci.Chain
 	params := GetChainParams(chainName)
-	b.Parser = Newmodden_testParser(params, b.ChainConfig)
+	b.Parser = NewmoddentestParser(params, b.ChainConfig)
 	b.Testnet = false
 	b.Network = "livenet"
 	glog.Info("rpc: block chain ", params.Name)
 	return nil
 }
 
-func (b *modden_testRPC) GetBlock(hash string, height uint32) (*bchain.Block, error) {
+func (b *moddentestRPC) GetBlock(hash string, height uint32) (*bchain.Block, error) {
 	var err error
 	if hash == "" && height > 0 {
 		hash, err = b.GetBlockHash(height)
@@ -78,6 +78,6 @@ func (b *modden_testRPC) GetBlock(hash string, height uint32) (*bchain.Block, er
 	return block, nil
 }
 
-func (b *modden_testRPC) GetTransactionForMempool(txid string) (*bchain.Tx, error) {
+func (b *moddentestRPC) GetTransactionForMempool(txid string) (*bchain.Tx, error) {
 	return b.GetTransaction(txid)
 }
