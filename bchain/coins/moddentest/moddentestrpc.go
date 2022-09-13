@@ -1,18 +1,18 @@
-package mobilitycoin
+package moddentest
 
 import (
 	"encoding/json"
 	"github.com/golang/glog"
-	"github.com/decenomy/blockbook/bchain"
-	"github.com/decenomy/blockbook/bchain/coins/btc"
+	"github.com/Nectum8/blockbook/bchain"
+	"github.com/Nectum8/blockbook/bchain/coins/btc"
 	"github.com/juju/errors"
 )
 
-type MobilitycoinRPC struct {
+type moddentestRPC struct {
 	*btc.BitcoinRPC
 }
 
-func NewMobilitycoinRPC(config json.RawMessage, pushHandler func(bchain.NotificationType)) (bchain.BlockChain, error) {
+func NewmoddentestRPC(config json.RawMessage, pushHandler func(bchain.NotificationType)) (bchain.BlockChain, error) {
 	b, err := btc.NewBitcoinRPC(config, pushHandler)
 	if err != nil {
 		return nil, err
@@ -25,21 +25,21 @@ func NewMobilitycoinRPC(config json.RawMessage, pushHandler func(bchain.Notifica
 	return s, nil
 }
 
-func (b *MobilitycoinRPC) Initialize() error {
+func (b *moddentestRPC) Initialize() error {
 	ci, err := b.GetChainInfo()
 	if err != nil {
 		return err
 	}
 	chainName := ci.Chain
 	params := GetChainParams(chainName)
-	b.Parser = NewMobilitycoinParser(params, b.ChainConfig)
+	b.Parser = moddentestParser(params, b.ChainConfig)
 	b.Testnet = false
 	b.Network = "livenet"
 	glog.Info("rpc: block chain ", params.Name)
 	return nil
 }
 
-func (b *MobilitycoinRPC) GetBlock(hash string, height uint32) (*bchain.Block, error) {
+func (b *moddentestRPC) GetBlock(hash string, height uint32) (*bchain.Block, error) {
 	var err error
 	if hash == "" && height > 0 {
 		hash, err = b.GetBlockHash(height)
@@ -78,6 +78,6 @@ func (b *MobilitycoinRPC) GetBlock(hash string, height uint32) (*bchain.Block, e
 	return block, nil
 }
 
-func (b *MobilitycoinRPC) GetTransactionForMempool(txid string) (*bchain.Tx, error) {
+func (b *moddentestRPC) GetTransactionForMempool(txid string) (*bchain.Tx, error) {
 	return b.GetTransaction(txid)
 }
