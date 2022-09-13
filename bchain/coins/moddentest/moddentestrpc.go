@@ -32,7 +32,7 @@ func (b *moddentestRPC) Initialize() error {
 	}
 	chainName := ci.Chain
 	params := GetChainParams(chainName)
-	b.Parser = modden_testparser(params, b.ChainConfig)
+	b.Parser = Newmoddentestparser(params, b.ChainConfig)
 	b.Testnet = false
 	b.Network = "livenet"
 	glog.Info("rpc: block chain ", params.Name)
