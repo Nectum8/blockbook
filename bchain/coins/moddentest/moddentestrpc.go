@@ -17,7 +17,7 @@ func NewmoddentestRPC(config json.RawMessage, pushHandler func(bchain.Notificati
 	if err != nil {
 		return nil, err
 	}
-	s := &MobilitycoinRPC{
+	s := &moddentestRPC{
 		b.(*btc.BitcoinRPC),
 	}
 	s.RPCMarshaler = btc.JSONMarshalerV1{}
@@ -32,7 +32,7 @@ func (b *moddentestRPC) Initialize() error {
 	}
 	chainName := ci.Chain
 	params := GetChainParams(chainName)
-	b.Parser = moddentestParser(params, b.ChainConfig)
+	b.Parser = modden_testparser(params, b.ChainConfig)
 	b.Testnet = false
 	b.Network = "livenet"
 	glog.Info("rpc: block chain ", params.Name)
